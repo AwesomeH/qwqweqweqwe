@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--这个mapper.xml,首先需要一个头文件-->
+<!--有config了，直接拷贝过来该两个参数就可以了-->
+
+<!--mapper有个核心重点  1 个mapper对应一个接口-->
+<!--namespace="com.time.dao.BookMapper"就绑定到这个接口了-->
+<mapper namespace="com.time.dao.BookMapper">
+
+    <!--增加一个Book-->
+    <insert id="addBook" parameterType="com.time.pojo.Books">
+        insert into ssmbuild.books(bookName,bookCounts,detail)
+        values (#{bookName}, #{bookCounts}, #{detail})
+    </insert>
+
+    <!--根据id删除一个Book-->
+    <delete id="deleteBookById" parameterType="int">
+        delete from ssmbuild.books where bookID=#{bookID}
+    </delete>
+
+    <!--更新Book-->
+    <update id="updateBook" parameterType="com.time.pojo.Books">
+        update ssmbuild.books
+        set bookName = #{bookName},bookCounts = #{bookCounts},detail = #{detail}
+        where bookID = #{bookID}
+    </update>
+
+    <!--根据id查询,返回一个Book-->
+    <select id="queryBookById" resultType="com.time.pojo.Books">
+        select * from ssmbuild.books
+        where bookID = #{bookID}
+    </select>
+
+    <!--查询全部Book-->
+    <select id="queryAllBook" resultType="com.time.pojo.Books">
+        SELECT * from ssmbuild.books
+    </select>
+
+</mapper>
+
+
+
+

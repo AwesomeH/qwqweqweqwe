@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.time.service"/> <!--只要是service包里面的只要有注解，又可以扫描过来
+    比如去BookServiceImpl类上面加一个@Service,就可以扫描到了-->
+
+
+    <!--2 将我们的所有业务类，注入到Spring种，可以配置，注解实现-->
+
+    <!--我们要把BookServiceImpl类注入进来，用配置的方法，就用bean就可以了-->
+
+
+    <!--3 声明事务配置-->
+
+    <!-- 扫描service相关的bean -->
+
+    <!--BookServiceImpl注入到IOC容器中-->
+    <bean id="BookServiceImpl" class="com.time.service.BookServiceImpl">
+        <property name="bookMapper" ref="bookMapper"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+
+
+
+
+
+</beans>
